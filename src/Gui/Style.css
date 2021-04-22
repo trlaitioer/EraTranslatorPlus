@@ -1,0 +1,75 @@
+QPushButton {
+    color: #000;
+    border: 1 solid rgba(91,231,221,64);
+    font-size: 15px;
+    border-radius: 1px;
+    background-color: #fff;
+}
+
+QPushButton:pressed {
+    background: qradialgradient(
+        cx: 0.5,
+        cy: 0.5,
+        fx: 0.5,
+        fy: 0.5,
+        radius: 1.5,
+        stop: 0.2 #fff,
+        stop: 0.8 #39c5bb
+    );
+}
+
+QHeaderView{
+    border: 0 solid #fff;
+    background-color: #fff;
+    border-bottom: 2px solid rgba(91,231,221,65);
+}
+
+QHeaderView::section{
+    border: 0 solid #fff;
+    background-color: #fff;
+    outline: none;
+}
+
+QTableWidget,QTableView{
+    border: 1px solid rgba(91,231,221,65);
+    alternate-background-color: #f8f8ff;
+    background-color: #fff;
+    selection-background-color : #39c5bb;
+}
+
+QTabWidget{
+    border:1px solid rgba(91,231,221,65);
+}
+
+QTabWidget::pane {
+    background-color: #fff;
+    border: none;
+}
+
+QTabBar::tab {
+    height: 180;
+    font-size: 15px;
+    padding: 8px 30px;
+    background-color: #ddffff;
+}
+
+
+QTabBar::tab:!selected {
+    background-color: #eeffff;
+}
+
+QPlainTextEdit {
+    border: 1px solid rgba(91,231,221,64);
+    border-radius: 1px;
+    font-size: 12px;
+    padding: 5px 8px;
+    selection-background-color: lightgray;
+}
+
+QPlainTextEdit:focus {
+    border: 1px solid rgba(57,197,187,200);
+}
+
+QMainWindow{
+    background-color: #fff;
+}
