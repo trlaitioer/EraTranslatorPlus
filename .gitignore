@@ -132,3 +132,7 @@ dmypy.json
 .vscode/
 #Qt tempfile
 *.ui
+#backup
+*.7z
+#tempfile
+config.ini
