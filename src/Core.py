@@ -1,6 +1,6 @@
 from pathlib import Path
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QGridLayout, QMainWindow, QWidget
+from PySide2.QtGui import QIcon
+from PySide2.QtWidgets import QApplication, QGridLayout, QMainWindow, QWidget
 from Gui.Tabs import TabWidget
 import sys
 import typing

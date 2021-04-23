@@ -106,7 +106,7 @@ class FileManager(IOManager):
             print(f"未预料的错误{self.path.name,e}")
         return ""
 
-    def readlines(self) -> list[str]:
+    def readlines(self) -> typing.List[str]:
         """auto detect the encoding using chardet"""
         try:
             return self.path.open(encoding="utf-8-sig").readlines()

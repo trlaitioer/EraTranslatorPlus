@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QTabWidget, QWidget
+from PySide2.QtWidgets import QTabWidget, QWidget
 from Gui.Page import CSVPage, ERBPage, CharaPage
 import typing
 

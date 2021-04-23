@@ -1,6 +1,6 @@
-from PySide6.QtCore import (QAbstractTableModel, QModelIndex, QObject, Qt, Signal)
-from PySide6.QtGui import QMouseEvent
-from PySide6.QtWidgets import QHeaderView, QTableView
+from PySide2.QtCore import (QAbstractTableModel, QModelIndex, QObject, Qt, Signal)
+from PySide2.QtGui import QMouseEvent
+from PySide2.QtWidgets import QHeaderView, QTableView
 from FileManager import ERBManager, CSVManager, CharaManager
 import typing
 

@@ -1,5 +1,5 @@
-from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QGridLayout, QPlainTextEdit, QPushButton, QWidget
+from PySide2.QtCore import Signal
+from PySide2.QtWidgets import QGridLayout, QPlainTextEdit, QPushButton, QWidget
 from Api import translate
 import typing
 

@@ -1,5 +1,5 @@
 from pathlib import Path
-from PySide6.QtWidgets import (QFrame, QGridLayout, QPushButton, QWidget, QFileDialog)
+from PySide2.QtWidgets import (QFrame, QGridLayout, QPushButton, QWidget, QFileDialog)
 from Config import getConfig
 from FileManager import ERBManager, CSVManager, CharaManager
 from Gui.DictView import DictData, DictTable
