@@ -11,6 +11,7 @@ CSVMatch = re.compile("|".join(getConfig("CSVMatch").values()))
 CharaMatch = re.compile("|".join(getConfig("CharaMatch").values()))
 CSVMatchChara = re.compile("|".join(getConfig("CSVMatchChara").values()))
 CSVMatchERB = "|".join(getConfig("CSVMatchERB").values())
+IGNOREMatch = re.compile(r"[\W|\d_a-zA-Z]+")
 
 
 class IOManager:
@@ -172,7 +173,7 @@ class ERBManager(FileManager):
             if not result:
                 continue
             result = list(filter(None, result.groups()))[0].strip()  #what needs translating
-            if not result:
+            if not result or result.isascii() or IGNOREMatch.fullmatch(result):
                 continue
             if result in self.cache:
                 self.dic[self.cache[result]] = result
@@ -215,7 +216,7 @@ class CSVManager(FileManager):
             if not result:
                 continue
             result = list(filter(None, result.groups()))[0].strip()  #what needs translating
-            if not result:
+            if not result or result.isascii() or IGNOREMatch.fullmatch(result):
                 continue
             if result in self.cache:
                 self.dic[self.cache[result]] = result
@@ -273,7 +274,7 @@ class CharaManager(IOManager):
                 if not result:
                     continue
                 result = list(filter(None, result.groups()))[0].strip()
-                if not result:
+                if not result or result.isascii() or IGNOREMatch.fullmatch(result):
                     continue
                 if result in self.cache:
                     self.dic[self.cache[result]] = result
