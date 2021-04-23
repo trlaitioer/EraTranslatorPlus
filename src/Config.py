@@ -37,6 +37,7 @@ defaultConfig = {
         "TSTR": "Tstr.csv"
     },
     "ERBMatch": {
+        "0": r"PRINT\S*\s+\[[\d\s]+\]\W*(.+)",
         "1": r"PRINT\S*\s+(.+)",
         "2": r"REUSELASTLINE\s+(.+)"
     },
