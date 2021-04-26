@@ -1,7 +1,23 @@
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, Qt
+from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QGridLayout, QPlainTextEdit, QPushButton, QWidget
 from Api import translate
 import typing
+
+
+class TextEdit(QPlainTextEdit):
+    textTab = Signal()
+    textsave = Signal()
+
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        if event.key() == Qt.Key_Return:
+            pass
+        elif event.key() == Qt.Key_Tab:
+            self.textTab.emit()
+        elif event.modifiers() == Qt.ControlModifier and event.key() == Qt.Key_S:
+            self.textsave.emit()
+        else:
+            super().keyPressEvent(event)
 
 
 class Translator(QWidget):
@@ -17,7 +33,7 @@ class Translator(QWidget):
         self.original = QPlainTextEdit(self)
         self.original.setReadOnly(True)
         self.originalEdit = QPlainTextEdit(self)
-        self.translation = QPlainTextEdit(self)
+        self.translation = TextEdit(self)
         self.copyButton = QPushButton("复制原文", self)
         self.translateButton = QPushButton("API翻译", self)
         self.preButton = QPushButton("<-", self)
@@ -41,9 +57,12 @@ class Translator(QWidget):
             lambda: self.textSave.emit(self.original.toPlainText(), self.translation.toPlainText()))
         self.preButton.clicked.connect(lambda: self.leftright.emit(-1))
         self.nexButton.clicked.connect(lambda: self.leftright.emit(1))
+        self.translation.textsave.connect(
+            lambda: self.textSave.emit(self.original.toPlainText(), self.translation.toPlainText()))
+        self.translation.textTab.connect(lambda: self.leftright.emit(1))
 
     def translate(self) -> None:
-        result = translate(self.originalEdit.toPlainText())
+        result = translate(self.originalEdit.toPlainText()).replace('\n', ' ').replace('\t', ' ')
         if result is not None:
             self.translation.setPlainText(result)
 
