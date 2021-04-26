@@ -62,7 +62,7 @@ class Translator(QWidget):
         self.translation.textTab.connect(lambda: self.leftright.emit(1))
 
     def translate(self) -> None:
-        result = translate(self.originalEdit.toPlainText()).replace('\n', ' ').replace('\t', ' ')
+        result = translate(self.originalEdit.toPlainText()).replace('\n', ' ').replace('\r', ' ').replace('\t', ' ')
         if result is not None:
             self.translation.setPlainText(result)
 
