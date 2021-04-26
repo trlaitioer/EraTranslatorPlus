@@ -55,7 +55,7 @@ UI风格模仿[![](https://img.shields.io/badge/QFlat-liaokongVFX-39c5bb?style=f
 
 #### *Config配置参数*
 
-默认参数请看 [example_config.ini](example_config.ini)
+默认参数请看[example_config.ini](example_config.ini)
 
 * ***Setting***
 
