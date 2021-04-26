@@ -124,6 +124,26 @@ class FileManager(IOManager):
         return []
 
 
+class dictManager(FileManager):
+    def __init__(self, path: typing.Union[Path, str]) -> None:
+        super().__init__(path)
+        if self.path.exists():
+            self.convert()
+
+    def load(self) -> dict[str, str]:
+        result = {}
+        for line in self.readlines():
+            line = line.split('\t')
+            if len(line) < 2:
+                continue
+            result[line[0].strip()] = line[1].strip()
+        return result
+
+    def save(self, dic: dict) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.open("w+", encoding="utf-8-sig").write("\n".join([f"{k}\t{v}" for k, v in dic.items()]))
+
+
 class CacheManager(FileManager):
     def load(self) -> None:
         self.dic = {}
