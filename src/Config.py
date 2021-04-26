@@ -15,7 +15,7 @@ defaultConfig = {
     "BaiduAPI": {
         "appid": "",
         "key": "",
-        "from": "auto",
+        "from": "jp",
         "to": "zh"
     },
     "SystemCSV": {
@@ -45,8 +45,11 @@ defaultConfig = {
         "1": r"\d+\s*,\s*([^\s,;]+)"
     },
     "CSVMatchERB": {
-        "1": r"%Attr%\s*:[^\s*/+-]+?:\s*([^\s,:;(){}|&*/+-]+)",
-        "2": r"%Attr%\s*:\s*([^\s,:;(){}|&*/+-]+)"
+        "palamsp0": r"CUP\s*:[^\s*/+-]+?:\s*([^\s,:;(){}|&=*/+-]+)",
+        "palamsp1": r"CUP\s*:\s*([^\s,:;(){}|&=*/+-]+)",
+        "generalsp": r'"(.+?)"',
+        "general0": r"[A-Z]+?\s*:[^\s*/+-]+?:\s*([^\s,:;(){}|&=*/+-]+)",
+        "general1": r"[A-Z]+?\s*:\s*([^\s,:;(){}|&=*/+-]+)"
     },
     "CSVMatchChara": {
         "1": r"^[^\s,;]+\s*,\s*([^\s,;]+)\s*,",
