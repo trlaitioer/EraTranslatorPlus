@@ -57,6 +57,9 @@ defaultConfig = {
         "1": r"名前\s*,\s*([^,;\n\r]+)",
         "2": r"呼び名\s*,\s*([^,;\n\r]+)",
         "3": r"CSTR\s*,\s*CHARA_RENAME\s*,\s*([^,;\n\r]+)"
+    },
+    "IGNOREMatch": {
+        "1": r"[\W|\d_a-zA-Z]+"
     }
 }
 config = Config(interpolation=None)

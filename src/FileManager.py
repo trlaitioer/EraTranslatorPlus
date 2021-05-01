@@ -11,7 +11,7 @@ CSVMatch = re.compile("|".join(getConfig("CSVMatch").values()))
 CharaMatch = re.compile("|".join(getConfig("CharaMatch").values()))
 CSVMatchChara = re.compile("|".join(getConfig("CSVMatchChara").values()))
 CSVMatchERB = re.compile("|".join(getConfig("CSVMatchERB").values()))
-IGNOREMatch = re.compile(r"[\W|\d_a-zA-Z]+")
+IGNOREMatch = re.compile("|".join(getConfig("IGNOREMatch").values()))
 
 
 class IOManager:
@@ -187,12 +187,12 @@ class ERBManager(FileManager):
         self.dic = {}
         for line in self.content:
             linestrip = line.strip()
-            if not linestrip or linestrip[0] == ";":  #comment or empty line
+            if not linestrip or linestrip[0] == ";":
                 continue
             result = ERBMatch.match(linestrip)
             if not result:
                 continue
-            result = list(filter(None, result.groups()))[0].strip()  #what needs translating
+            result = list(filter(None, result.groups()))[0].strip()
             if not result or result.isascii() or IGNOREMatch.fullmatch(result):
                 continue
             if result in self.cache:
@@ -229,12 +229,12 @@ class CSVManager(FileManager):
         self.dic = {}
         for line in self.content:
             linestrip = line.strip()
-            if not linestrip or linestrip[0] == ";":  #comment or empty line
+            if not linestrip or linestrip[0] == ";":
                 continue
             result = CSVMatch.match(linestrip)
             if not result:
                 continue
-            result = list(filter(None, result.groups()))[0].strip()  #what needs translating
+            result = list(filter(None, result.groups()))[0].strip()
             if not result or result.isascii() or IGNOREMatch.fullmatch(result):
                 continue
             if result in self.cache:
