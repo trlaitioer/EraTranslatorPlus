@@ -59,7 +59,7 @@ defaultConfig = {
         "3": r"CSTR\s*,\s*CHARA_RENAME\s*,\s*([^,;\n\r]+)"
     },
     "IGNOREMatch": {
-        "1": r"[\W|\d_a-zA-Z]+"
+        "1": r"[\W\d_a-zA-Z]+"
     }
 }
 config = Config(interpolation=None)
