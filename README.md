@@ -44,7 +44,7 @@ UI风格模仿[![](https://img.shields.io/badge/QFlat-liaokongVFX-39c5bb?style=f
 4. 一些按钮，读取/保存字典尚未实现
 5. **原文**(不可更改)
 6. 用于编辑的文本框，**API翻译的原文**
-7. API翻译后会替换该文本框的原先内容，保存时此处文本为**译文**
+7. API翻译后会替换该文本框的原先内容，保存时此处文本为**译文**。*1.0.1版本后这个文本框会有Tab(下一个)和Ctrl+S(保存)快捷键，同时禁止换行，翻译结果中的换行和tab(制表符)会被替换成空格。
 
 #### 功能
 
@@ -55,25 +55,15 @@ UI风格模仿[![](https://img.shields.io/badge/QFlat-liaokongVFX-39c5bb?style=f
 
 #### *Config配置参数*
 
+默认参数请看[example_config.ini](example_config.ini)
+
 * ***Setting***
 
-```
-[Setting]
-API = BaiduAPI
-```
 目前只有百度API可以用，后续可能会加入其他API
 
 可以置空，则不会使用任何API
 
 * ***BaiduAPI***
-
-```
-[BaiduAPI]
-appid =
-key =
-from = auto
-to = zh
-```
 
 appid与key填百度API账号<br>
 from原文语种<br>
@@ -83,14 +73,6 @@ to目标语种
 
 * ***SystemCSV***
 
-```
-[SystemCSV]
-ABL = Abl.csv
-BASE = Base.csv
-CFLAG = CFlag.csv
-(余下省略)
-```
-
 可以自己添加，键值随意
 
 只有添加在此处的CSV可被翻译
@@ -99,54 +81,21 @@ CFLAG = CFlag.csv
 
 * ***ERBMatch***
 
-```
-[ERBMatch]
-0 = PRINT\S*\s+\[[\d\s]+\]\W*(.+)
-1 = PRINT\S*\s+(.+)
-2 = REUSELASTLINE\s+(.+)
-```
-
 识别ERB中需要翻译内容的正则表达式，格式请参考Python的re模块，需要翻译的部分用英文括号括起
 
 * ***CSVMatch***
-
-```
-[CSVMatch]
-1 = \d+\s*,\s*([^\s,;]+)
-```
 
 识别CSV中需要翻译内容的正则表达式，格式同上
 
 * ***CSVMatchERB***
 
-```
-[CSVMatchERB]
-1 = %Attr%\s*:[^\s*/+-]+?:\s*([^\s,:;(){}|&*/+-]+)
-2 = %Attr%\s*:\s*([^\s,:;(){}|&*/+-]+)
-```
-
 识别CSV中需要翻译内容在ERB中格式的正则表达式，格式同上
 
-%Attr%参数为翻译的文件名(不包括后缀，大写)
-
 * ***CSVMatchChara***
-
-```
-[CSVMatchChara]
-1 = ^[^\s,;]+\s*,\s*([^\s,;]+)\s*,
-2 = ^[^\s,;]+\s*,\s*([^\s,;]+)
-```
 
 识别CSV中需要翻译内容在角色CSV文件中格式的正则表达式，格式同上
 
 * ***CharaMatch***
-
-```
-[CharaMatch]
-1 = 名前\s*,\s*([^,;\n\r]+)
-2 = 呼び名\s*,\s*([^,;\n\r]+)
-3 = CSTR\s*,\s*CHARA_RENAME\s*,\s*([^,;\n\r]+)
-```
 
 识别角色CSV文件(chara*.csv)中需要翻译名字的正则表达式，格式同上
 

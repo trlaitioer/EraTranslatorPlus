@@ -10,7 +10,7 @@ ERBMatch = re.compile("|".join(getConfig("ERBMatch").values()))
 CSVMatch = re.compile("|".join(getConfig("CSVMatch").values()))
 CharaMatch = re.compile("|".join(getConfig("CharaMatch").values()))
 CSVMatchChara = re.compile("|".join(getConfig("CSVMatchChara").values()))
-CSVMatchERB = "|".join(getConfig("CSVMatchERB").values())
+CSVMatchERB = re.compile("|".join(getConfig("CSVMatchERB").values()))
 IGNOREMatch = re.compile(r"[\W|\d_a-zA-Z]+")
 
 
@@ -124,6 +124,26 @@ class FileManager(IOManager):
         return []
 
 
+class dictManager(FileManager):
+    def __init__(self, path: typing.Union[Path, str]) -> None:
+        super().__init__(path)
+        if self.path.exists():
+            self.convert()
+
+    def load(self) -> typing.Dict[str, str]:
+        result = {}
+        for line in self.readlines():
+            line = line.split('\t')
+            if len(line) < 2:
+                continue
+            result[line[0].strip()] = line[1].strip()
+        return result
+
+    def save(self, dic: dict) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.open("w+", encoding="utf-8-sig").write("\n".join([f"{k}\t{v}" for k, v in dic.items()]))
+
+
 class CacheManager(FileManager):
     def load(self) -> None:
         self.dic = {}
@@ -199,7 +219,6 @@ class CSVManager(FileManager):
         self.content = self.readlines()
         self.cache = CacheManager(self.root.joinpath(f"cache/csv/{self.path.name+'.cache'}"))
         self.load()
-        self.saveMatch = re.compile(CSVMatchERB.replace(r"%Attr%", self.path.stem.upper()))
 
     @property
     def root(self) -> Path:
@@ -238,8 +257,8 @@ class CSVManager(FileManager):
             tempcontent = []
             for line in manager.readlines():
                 if self.cache:
-                    line = self.saveMatch.sub(lambda x: resub(x, self.cache), line)
-                line = self.saveMatch.sub(lambda x: resub(x, self.dic), line)
+                    line = CSVMatchERB.sub(lambda x: resub(x, self.cache), line)
+                line = CSVMatchERB.sub(lambda x: resub(x, self.dic), line)
                 tempcontent.append(line)
             manager.path.open("w+", encoding="utf-8-sig").writelines(tempcontent)
 
